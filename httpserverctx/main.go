@@ -10,11 +10,21 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", indexHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	if err := http.ListenAndServe(":8080", handler()); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func handler() http.Handler {
+	h := http.NewServeMux()
+	h.HandleFunc("/", indexHandler)
+	return h
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, fmt.Errorf("Only Get Method allowed").Error(), http.StatusMethodNotAllowed)
+	}
 	ctx := r.Context()
 	jobc := make(chan struct{})
 	defer close(jobc)
