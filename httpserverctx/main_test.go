@@ -14,12 +14,14 @@ import (
 func TestRouting(t *testing.T) {
 	tt := &[]struct {
 		name       string
+		method     string
 		url        string
 		statusCode int
 		body       string
 	}{
-		{"index", "", http.StatusOK, "Hello World"},
-		{"garbage", "/garbage", http.StatusOK, "Hello World"},
+		{"index", http.MethodGet, "", http.StatusOK, "Hello World"},
+		{"garbage", http.MethodGet, "/garbage", http.StatusOK, "Hello World"},
+		{"method not get", http.MethodPost, "", http.StatusMethodNotAllowed, "only GET method allowed"},
 	}
 
 	s := httptest.NewServer(handler())
@@ -27,9 +29,14 @@ func TestRouting(t *testing.T) {
 
 	for _, tc := range *tt {
 		t.Run(tc.name, func(t *testing.T) {
-			res, err := http.Get(fmt.Sprintf("%s/%s", s.URL, tc.url))
+			req, err := http.NewRequest(tc.method, fmt.Sprintf("%s/%s", s.URL, tc.url), nil)
 			if err != nil {
-				t.Fatalf("could not GET req: %v", err)
+				t.Fatalf("could not %v req: %v", tc.method, err)
+			}
+
+			res, err := http.DefaultClient.Do(req)
+			if err != nil {
+				t.Fatalf("could not get response: %v", err)
 			}
 
 			if res.StatusCode != tc.statusCode {
@@ -52,18 +59,16 @@ func TestRouting(t *testing.T) {
 func TestIndexContext(t *testing.T) {
 	tt := &[]struct {
 		name       string
-		method     string
 		timeout    time.Duration
 		statusCode int
 	}{
-		{"normal", http.MethodGet, 30, http.StatusOK},
-		{"client timeout", http.MethodGet, 3, http.StatusInternalServerError},
-		{"method not get", http.MethodPost, 30, http.StatusMethodNotAllowed},
+		{"normal", 30, http.StatusOK},
+		{"client timeout", 3, http.StatusInternalServerError},
 	}
 
 	for _, tc := range *tt {
 		t.Run(tc.name, func(t *testing.T) {
-			req, err := http.NewRequest(tc.method, "/", nil)
+			req, err := http.NewRequest(http.MethodGet, "/", nil)
 			if err != nil {
 				t.Fatal(err)
 			}

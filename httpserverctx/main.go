@@ -23,7 +23,8 @@ func handler() http.Handler {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, fmt.Errorf("Only Get Method allowed").Error(), http.StatusMethodNotAllowed)
+		http.Error(w, fmt.Errorf("only GET method allowed").Error(), http.StatusMethodNotAllowed)
+		return
 	}
 	ctx := r.Context()
 	jobc := make(chan struct{})
