@@ -1,4 +1,4 @@
-// Http server with graceful exit
+// Simple http server with graceful exit
 package main
 
 import (
