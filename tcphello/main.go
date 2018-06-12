@@ -26,7 +26,8 @@ func main() {
 		for {
 			c, err := l.Accept()
 			if err != nil {
-				log.Fatalf("Error accepting connection: %v", err)
+				log.Printf("Error accepting connection: %v\n", err)
+				continue
 			}
 			conchan <- c
 		}
