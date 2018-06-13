@@ -18,6 +18,7 @@ func main() {
 
 	sigquit := make(chan os.Signal, 1)
 	signal.Notify(sigquit, os.Interrupt, os.Kill, syscall.SIGQUIT)
+	defer close(sigquit)
 
 	conchan := make(chan net.Conn, 10)
 	defer close(conchan)
