@@ -33,14 +33,16 @@ func main() {
 		}
 	}()
 
-	go func() {
-		for {
-			c := <-conchan
+loop:
+	for {
+		select {
+		case c := <-conchan:
 			fmt.Fprint(c, "Hello World!")
 			c.Close()
+		case <-sigquit:
+			break loop
 		}
-	}()
+	}
 
-	<-sigquit
 	log.Println("Exited gracefully")
 }
