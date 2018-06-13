@@ -14,11 +14,10 @@ import (
 
 func main() {
 	srv := &http.Server{
-		Addr:         ":8080",
-		Handler:      handler(),
-		ReadTimeout:  5 * time.Second,
-		IdleTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		Addr:              ":8080",
+		Handler:           handler(),
+		ReadHeaderTimeout: 5 * time.Second,
+		WriteTimeout:      10 * time.Second,
 	}
 
 	go func() {
