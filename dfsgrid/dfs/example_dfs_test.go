@@ -3,7 +3,7 @@ package dfs_test
 import (
 	"fmt"
 
-	"github.com/julesmike/examples/dfsgrid/dfs"
+	"github.com/julesmike/toys/dfsgrid/dfs"
 )
 
 // Demonstrating DFS with a 3x4 grid of integers

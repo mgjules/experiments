@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/julesmike/examples/dfsgrid/dfs"
+	"github.com/julesmike/toys/dfsgrid/dfs"
 )
 
 const (
