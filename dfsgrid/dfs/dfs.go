@@ -1,7 +1,8 @@
-// Package dfs implements a simple depth-first search
+// Package dfs implements a simple depth-first search for grids
 package dfs
 
-// Do returns the maximum connected similar integer in any given map[int][]int
+// Do returns the maximum number of connected similar integer
+// in any given map[int][]int
 func Do(grid map[int][]int) int {
 	visited := make([][]bool, len(grid))
 	for i, row := range grid {
