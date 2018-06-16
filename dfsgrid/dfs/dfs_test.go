@@ -10,7 +10,12 @@ func TestDfs(t *testing.T) {
 		grid map[int][]int
 		res  int
 	}{
-		{"rigid", map[int][]int{
+		{"square", map[int][]int{
+			0: []int{0, 3, 2},
+			1: []int{3, 3, 3},
+			2: []int{1, 3, 0}}, 5,
+		},
+		{"rectangle", map[int][]int{
 			0: []int{0, 0, 2, 2},
 			1: []int{0, 1, 1, 2},
 			2: []int{1, 1, 2, 2}}, 5,
