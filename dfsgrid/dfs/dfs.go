@@ -1,6 +1,8 @@
 // Package dfs implements a simple depth-first search for grids
 package dfs
 
+// checking 4 sides but can check 8 sides
+// i.e bottom-right, bottom-left, top-left, top-right
 var dd = map[string]struct {
 	i, j int
 }{
