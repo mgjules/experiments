@@ -1,9 +1,24 @@
 // Package dfs implements a simple depth-first search for grids
 package dfs
 
+type direction map[string]struct {
+	i, j int
+}
+
+var dd direction
+
 // Do returns the maximum number of connected similar integer
 // in any given map[int][]int
 func Do(grid map[int][]int) int {
+	dd = direction{
+		"right":  {i: 0, j: +1},
+		"bottom": {i: +1, j: 0},
+		"left":   {i: 0, j: -1},
+		"top":    {i: -1, j: 0},
+	}
+
+	// init 2d array visited as same size as grid and
+	// with all cells as false
 	visited := make([][]bool, len(grid))
 	for i, row := range grid {
 		visited[i] = make([]bool, len(row))
@@ -31,16 +46,7 @@ func rec(g map[int][]int, c, i, j int, h *int, v [][]bool) int {
 	v[i][j] = true
 	*h++
 
-	// can be adapted to check all 8 sides instead of 4
-	dd := map[string]struct {
-		i, j int
-	}{
-		"right":  {i: 0, j: +1},
-		"bottom": {i: +1, j: 0},
-		"left":   {i: 0, j: -1},
-		"top":    {i: -1, j: 0},
-	}
-
+	// loop over each direction and recurse
 	for _, d := range dd {
 		rec(g, c, i+d.i, j+d.j, h, v)
 	}
