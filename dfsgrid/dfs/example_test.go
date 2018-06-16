@@ -8,7 +8,7 @@ import (
 
 // Demonstrating DFS with a 3x4 grid of integers
 // ranging from 0 to 2
-func ExampleDo() {
+func Example_usage() {
 	grid := map[int][]int{
 		0: []int{0, 0, 2, 2},
 		1: []int{0, 1, 1, 2},
