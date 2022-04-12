@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/julesmike/toys/grpchello/hello"
+	"github.com/mgjules/toys/grpchello/hello"
 	"google.golang.org/grpc"
 )
 
@@ -20,8 +20,7 @@ func main() {
 	log.Fatalln(srv.Serve(l))
 }
 
-type helloServer struct {
-}
+type helloServer struct{}
 
 func (s helloServer) GetHello(ctx context.Context, void *hello.Void) (*hello.Hello, error) {
 	out := &hello.Hello{Text: "Hello World w/ gRPC ;)"}

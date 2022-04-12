@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/julesmike/toys/dfsgrid/dfs"
+	"github.com/mgjules/toys/dfsgrid/dfs"
 )
 
 const (
@@ -14,9 +14,9 @@ const (
 
 func main() {
 	grid := map[int][]int{
-		0: []int{blue, blue, green, red},
-		1: []int{blue, green, red, green},
-		2: []int{red, green, green, green},
+		0: {blue, blue, green, red},
+		1: {blue, green, red, green},
+		2: {red, green, green, green},
 	}
 
 	fmt.Println(dfs.Do(grid))
