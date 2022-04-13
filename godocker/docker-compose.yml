@@ -14,7 +14,7 @@ services:
     environment:
       - VIRTUAL_HOST=lsl.local
     volumes:
-      - .:/go/src/github.com/mgjules/toys/godocker
+      - .:/go/src/github.com/mgjules/experiments/godocker
     expose:
       - 8888
     depends_on:

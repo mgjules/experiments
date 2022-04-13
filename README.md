@@ -1,7 +1,7 @@
-# Toys
+# Go Experiments
 
-Just some toy go solutions for specific concerns.
+Where I experiment with some ideas in Go before going full throttle.
 
 Me 💙 Go
 
-**P.S The toys are not fully production ready**
+**Disclaimer: The experiments are not production ready**

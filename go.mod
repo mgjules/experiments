@@ -1,4 +1,4 @@
-module github.com/mgjules/toys
+module github.com/mgjules/experiments
 
 go 1.18
 
